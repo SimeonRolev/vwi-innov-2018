@@ -1,0 +1,16 @@
+.hover-icon {
+    transition: color 0.25s ease;
+
+    &:hover {
+        color: $vw-annual-color;
+        cursor: pointer;
+    }
+}
+
+.icon {
+    display: flex;
+}
+
+.icon-32 {
+    font-size: 32px;
+}

@@ -1,0 +1,67 @@
+@import '~scss/assets/asset';
+
+
+/* Thumb view global variables */
+$asset-thumb-width: 373px;
+$asset-thumb-height: 340px;
+$asset-thumb-size: 210px;
+
+.asset__grid-separator {
+    @mixin auto-size {
+        padding: 8px;
+
+        .asset__thumbnail {
+            @include fit-background--cover;
+            position: relative;
+            display: flex;
+        }
+
+        .asset__thumbnail--grid {
+            width: 100%;
+            height: auto;
+            padding-bottom: 56.25%;
+        }
+
+        .name {
+            width: 100%;
+        }
+    }
+
+    @include respond-to(phone) {
+        @include auto-size();
+        width: 100%;
+    }
+
+    @include respond-to(tablet) {
+        @include auto-size();
+        width: 50%;
+    }
+
+    @include respond-to(small_screen) {
+        @include auto-size();
+        width: 33%;
+    }
+
+    @include respond-to(large_screen) {
+        @include auto-size();
+        width: 25%;
+    }
+
+    position: relative;
+    float: left;
+
+    .asset--grid {
+        box-shadow: $thumb-shadow;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.asset__info {
+    @include duo-attr();
+
+    padding: 2px 7px;
+    border-top: 1px solid $border-color;
+}

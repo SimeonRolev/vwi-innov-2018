@@ -1,28 +1,33 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Provider } from 'mobx-react';
+import './scss/main.scss';
+
+
+import { Store } from './js/store/Store';
+import Home from './js/pages/home/Home';
+
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+    constructor (props) {
+        super(props);
+        
+        this.store = new Store();
+    }
+
+    render () {
+        return (
+            <Provider 
+                store={this.store}
+                assetStore={this.store.asset}
+                UIStore={this.store.ui}
+            >
+                <Router>
+                    <Route exact path='/' component={ Home } />
+                </Router>
+            </Provider>
+        );
+    }
 }
 
 export default App;

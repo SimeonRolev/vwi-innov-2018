@@ -1,0 +1,23 @@
+@import '~scss/components/search';
+
+
+.header {
+    height: $header-height;
+    background-color: white;
+    border-bottom: 1px solid $border-color;
+
+    display: flex;
+    align-items: center;
+}
+
+.header__tools {
+    float: right;
+}
+
+.header__search {
+    @include respond-to-at-least(tablet) {
+        width: 100%;
+    }
+
+    width: 40%;
+}

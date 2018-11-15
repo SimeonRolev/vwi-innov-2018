@@ -1,0 +1,27 @@
+@mixin fit-background--cover {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@mixin text-collapse {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+@mixin duo-attr(
+    $first-size: 15px, 
+    $first-color: $text-primary-color, 
+    $second-size: 12px, 
+    $second-color: $text-secondary-color
+) {
+    .first {
+        font-size: $first-size;
+        color: $first-color;
+    }
+    .second {
+        font-size: $second-size;
+        color: $second-color;
+    }
+}
