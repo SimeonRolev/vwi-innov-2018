@@ -6,6 +6,10 @@ $asset-thumb-width: 373px;
 $asset-thumb-height: 340px;
 $asset-thumb-size: 210px;
 
+.asset.selected {
+    background-color: $vw-annual-color;
+}
+
 .asset__grid-separator {
     @mixin auto-size {
         padding: 8px;
@@ -62,6 +66,7 @@ $asset-thumb-size: 210px;
 .asset__info {
     @include duo-attr();
 
+    background-color: white;
     padding: 2px 7px;
     border-top: 1px solid $border-color;
 }

@@ -1,15 +1,26 @@
-import { observable, decorate, computed, autorun } from 'mobx';
+import { observable, decorate, autorun, action } from 'mobx';
 
 class CollectionItem {
+    isSelected = false;
+    
     constructor (data) {
         this.data = data;
-        this.isSelected = false;
     }
 
     select () {
         this.isSelected = true;
     }
+
+    deselect () {
+        this.isSelected = false;
+    }
 }
+
+decorate(CollectionItem, {
+    isSelected: observable,
+    select: action,
+    deselect: action
+})
 
 class Collection {
     items = []
@@ -20,18 +31,19 @@ class Collection {
         });
     }
 
-    get selectedItem () {
-        return this.items.find(item => item.isSelected)
-    }
-
     deselectAll () {
         this.items.map(item => item.deselect())
+    }
+
+    select (id) {
+        this.deselectAll();
+        this.items.find(item => item.data.id === id).select();
     }
 }
 
 decorate(Collection, {
     items: observable,
-    selectedItem: computed
+    select: action
 })
 
 export default Collection;
