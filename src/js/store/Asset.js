@@ -1,6 +1,6 @@
 import { observable, decorate, action } from 'mobx';
 
-import homeApi, { HomeAsset } from 'js/pages/home/api';
+import homeApi from 'js/pages/home/api';
 
 class AssetStore {
     assets = [];
@@ -11,7 +11,13 @@ class AssetStore {
 
     loadHomeAssets () {
         homeApi.getItems().then(assets => {
-            this.assets.replace(assets.map(asset => new HomeAsset.fromApi(asset)));
+            this.assets.replace(assets);
+        });
+    }
+
+    search (query) {
+        homeApi.search(query).then(assets => {
+            this.assets.replace(assets);
         });
     }
 }

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { FaSearch, FaTimes } from 'react-icons/fa';
 import Icon from 'js/components/Icon';
+import { withStore } from 'js/store/Store';
 
 class Search extends Component {
     constructor (props) {
@@ -22,25 +23,25 @@ class Search extends Component {
     }
 
     search = () => {
-        
+        this.state.inputString && this.props.assetStore.search(this.state.inputString);
     }
 
     render() {
         return (
             <div className={`search ${this.props.cssClass ? this.props.cssClass : ''}`}>
                 <div className='search__input-wrap'>
-                    <input 
+                    <input
                         className='search__input'
                         onChange={ this.onInput }
                         value={this.state.inputString} />
-                    
+
                     <Icon
                         onClick={ this.clearInput }
                         iconComponent={ FaTimes }
                         cssClass='icon-close hover-icon' />
                 </div>
 
-                <Icon 
+                <Icon
                     onClick={ this.search }
                     iconComponent={ FaSearch }
                     cssClass='hover-icon icon-32' />
@@ -53,4 +54,4 @@ Search.propTypes = {
 
 };
 
-export default Search;
+export default withStore(Search, 'assetStore');

@@ -24,9 +24,9 @@ class Home extends Component {
                 <Header />
                 <div className='asset-container asset-container--grid'>
                     {
-                        this.itemCollection.items.map((item, idx) => 
+                        this.itemCollection.items.map((item, idx) =>
                             <HomeAsset
-                                key={idx} 
+                                key={idx}
                                 isSelected={item.isSelected}
                                 onClick={ () => this.itemCollection.select(item.data.id) }
                                 data={item.data}
