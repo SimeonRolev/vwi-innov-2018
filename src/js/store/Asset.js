@@ -9,16 +9,16 @@ class AssetStore {
         this.root = root;
     }
 
-    getHomeAssets () {
+    loadHomeAssets () {
         homeApi.getItems().then(assets => {
-            this.assets = assets.map(asset => new HomeAsset.fromApi(asset))
+            this.assets.replace(assets.map(asset => new HomeAsset.fromApi(asset)));
         });
     }
 }
 
 decorate(AssetStore, {
     assets: observable,
-    getHomeAssets: action
+    loadHomeAssets: action
 })
 
 export default AssetStore;
