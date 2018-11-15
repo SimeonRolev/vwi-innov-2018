@@ -42,7 +42,7 @@ class HomeAsset extends Component {
                 </div>
 
                 { this.props.isSelected && <LikeWidget action={ () => {}} />}
-                { this.props.isSelected && <DownloadWidget action={ () => { window.open(this.props.data.link, "_blank") }} />}
+                { this.props.isSelected && <DownloadWidget action={ this.props.data.download } />}
             </div>
         );
     }

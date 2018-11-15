@@ -13,6 +13,12 @@ class HomeAsset {
         this.previewDate = data.date_updated || 'No upload date';
         this.thumbnail = data.thumbnail;
         this.link = data.url_vwx_attachment;
+
+        this.download = this.download.bind(this);
+    }
+
+    download () {
+        window.open(this.link);
     }
 }
 
