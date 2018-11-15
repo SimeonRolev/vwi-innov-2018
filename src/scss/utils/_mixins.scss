@@ -17,10 +17,12 @@
     $second-color: $text-secondary-color
 ) {
     .first {
+        @include text-collapse;
         font-size: $first-size;
         color: $first-color;
     }
     .second {
+        @include text-collapse;
         font-size: $second-size;
         color: $second-color;
     }

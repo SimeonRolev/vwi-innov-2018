@@ -10,6 +10,7 @@ class HomeAsset {
         this.id = data.id;
         this.name = link[link.length - 1];
         this.author = data.author;
+        this.previewDate = data.date_updated || 'No upload date';
         this.thumbnail = data.thumbnail;
         this.link = data.url_vwx_attachment;
     }

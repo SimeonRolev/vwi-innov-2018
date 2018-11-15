@@ -37,12 +37,12 @@ class HomeAsset extends Component {
                     }}/>
                     <div className='asset__info'>
                         <div className='first'>{ this.props.data.name }</div>
-                        <div className='second'>{ this.props.data.author }</div>
+                        <div className='second'>{ this.props.data.previewDate }</div>
                     </div>
                 </div>
 
                 { this.props.isSelected && <LikeWidget action={ () => {}} />}
-                { this.props.isSelected && <DownloadWidget action={ () => {}} />}
+                { this.props.isSelected && <DownloadWidget action={ () => { window.open(this.props.data.link, "_blank") }} />}
             </div>
         );
     }
@@ -51,7 +51,7 @@ class HomeAsset extends Component {
 HomeAsset.propTypes = {
     name: PropTypes.string,
     thumbnail: PropTypes.string,
-    author: PropTypes.string
+    previewDate: PropTypes.string
 };
 
 export default observer(HomeAsset);
