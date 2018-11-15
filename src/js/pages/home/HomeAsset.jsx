@@ -2,6 +2,27 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { observer } from 'mobx-react'
+import Icon from 'js/components/Icon';
+import { FaThumbsUp, FaDownload } from 'react-icons/fa';
+
+
+const LikeWidget = (props) => {
+    return (
+        <Icon
+            onClick={ props.action }
+            iconComponent={ FaThumbsUp }
+            cssClass='asset__widget asset__like-widget' />
+    )
+}
+
+const DownloadWidget = (props) => {
+    return (
+        <Icon
+            onClick={ props.action }
+            iconComponent={ FaDownload }
+            cssClass='asset__widget asset__download-widget' />
+    )
+}
 
 class HomeAsset extends Component {
     render() {
@@ -19,6 +40,9 @@ class HomeAsset extends Component {
                         <div className='second'>{ this.props.data.author }</div>
                     </div>
                 </div>
+
+                { this.props.isSelected && <LikeWidget action={ () => {}} />}
+                { this.props.isSelected && <DownloadWidget action={ () => {}} />}
             </div>
         );
     }
