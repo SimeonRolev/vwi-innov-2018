@@ -22,10 +22,17 @@ class Home extends Component {
         this.loadAssets();
     }
 
+    componentDidUpdate (prevProps) {
+        if (this.props.match.params.q !== prevProps.match.params.q) {
+            this.loadAssets()
+        }
+    }
+
     loadAssets () {
         this.setState({ loading: true });
+
         this.props.assetStore
-            .loadHomeAssets()
+            .search(this.props.match.params.q)
             .then(() => this.setState({ loading: false }));
     }
 
@@ -36,7 +43,7 @@ class Home extends Component {
                 <div className='asset-container asset-container--grid'>
                     {
                         this.state.loading 
-                            ? <div>Loading all assets ... </div>
+                            ? <div>Loading results for { this.props.match.params.q }... </div>
                             : this.itemCollection.items.map((item, idx) =>
                                 <HomeAsset
                                     key={idx}

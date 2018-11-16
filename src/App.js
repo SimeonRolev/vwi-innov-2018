@@ -6,6 +6,7 @@ import './scss/main.scss';
 
 import { Store } from './js/store/Store';
 import Home from './js/pages/home/Home';
+import HomeSearch from './js/pages/home/HomeSearch';
 
 
 class App extends Component {
@@ -25,7 +26,7 @@ class App extends Component {
                 <Router>
                     <React.Fragment>
                         <Route exact path='/' component={ Home } />
-                        <Route path='/search/:q' component={ Home } />
+                        <Route path='/search/:q' component={ HomeSearch } />
                     </React.Fragment>
                 </Router>
             </Provider>
