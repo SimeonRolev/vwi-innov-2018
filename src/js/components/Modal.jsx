@@ -8,10 +8,14 @@ class Modal extends Component {
         this.props.onClose && this.props.onClose();
     }
 
+    stopPropagation (e) {
+        e.stopPropagation();
+    }
+
     render () {
         return (
             <div className="modal__layover" onClick={ this.onClose }>
-                <div className="modal__layover__content">
+                <div className="modal__layover__content" onClick={ this.stopPropagation }>
                     { this.props.content }
                     <Icon
                         onClick={ this.onClose }
