@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { observer } from 'mobx-react'
 import Icon from 'js/components/Icon';
-import { FaThumbsUp, FaDownload } from 'react-icons/fa';
+import { FaThumbsUp, FaDownload, FaEye } from 'react-icons/fa';
 
 
 const LikeWidget = (props) => {
@@ -21,6 +21,15 @@ const DownloadWidget = (props) => {
             onClick={ props.action }
             iconComponent={ FaDownload }
             cssClass='asset__widget asset__download-widget' />
+    )
+}
+
+const InfoWidget = (props) => {
+    return (
+        <Icon
+            onClick={ props.action }
+            iconComponent={ FaEye }
+            cssClass='asset__widget asset__view-widget' />
     )
 }
 
@@ -43,6 +52,7 @@ class HomeAsset extends Component {
 
                 { this.props.isSelected && <LikeWidget action={ () => {}} />}
                 { this.props.isSelected && <DownloadWidget action={ this.props.data.download } />}
+                { this.props.isSelected && <InfoWidget action={ this.props.openAssetInfoModal } />}
             </div>
         );
     }

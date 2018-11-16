@@ -1,4 +1,4 @@
-import { observable, decorate, autorun, action } from 'mobx';
+import { observable, computed, decorate, autorun, action } from 'mobx';
 
 class CollectionItem {
     isSelected = false;
@@ -35,6 +35,10 @@ class Collection {
         this.items.map(item => item.deselect())
     }
 
+    get selectedItem () {
+        return this.items.find(item => item.isSelected);
+    }
+
     select (id) {
         this.deselectAll();
         this.items.find(item => item.data.id === id).select();
@@ -43,7 +47,9 @@ class Collection {
 
 decorate(Collection, {
     items: observable,
-    select: action
+    selectedItem: computed,
+    select: action,
+    deselectAll: action
 })
 
 export default Collection;
