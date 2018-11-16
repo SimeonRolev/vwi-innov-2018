@@ -1,29 +1,31 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom'
 
 import { FaSearch, FaTimes } from 'react-icons/fa';
 import Icon from 'js/components/Icon';
 import { withStore } from 'js/store/Store';
 
 class Search extends Component {
-    constructor (props) {
-        super(props);
 
-        this.state = {
-            inputString: ''
-        }
+    inputRef = React.createRef();
+
+    get inputVal () { 
+        return this.inputRef.current.value;
     }
 
     clearInput = () => {
-        this.setState({ inputString: '' });
+        this.inputRef.current.value = '';
+        this.props.history.push('/');
     }
 
-    onInput = (e) => {
-        this.setState({ inputString: e.target.value });
+    onKeyPress = (e) => {
+        e.key === 'Enter' &&  this.search();
     }
 
     search = () => {
-        this.state.inputString && this.props.assetStore.search(this.state.inputString);
+        if (this.inputVal) {
+            this.props.history.push(`/search/${this.inputVal}`)
+        }  
     }
 
     render() {
@@ -31,9 +33,10 @@ class Search extends Component {
             <div className={`search ${this.props.cssClass ? this.props.cssClass : ''}`}>
                 <div className='search__input-wrap'>
                     <input
+                        ref={ this.inputRef }
                         className='search__input'
-                        onChange={ this.onInput }
-                        value={this.state.inputString} />
+                        onKeyPress = { this.onKeyPress }
+                        defaultValue={ this.props.query || '' } />
 
                     <Icon
                         onClick={ this.clearInput }
@@ -54,4 +57,4 @@ Search.propTypes = {
 
 };
 
-export default withStore(Search, 'assetStore');
+export default withStore(withRouter(Search), 'assetStore');

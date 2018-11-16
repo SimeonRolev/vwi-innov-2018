@@ -10,13 +10,13 @@ class AssetStore {
     }
 
     loadHomeAssets () {
-        homeApi.getItems().then(assets => {
+        return homeApi.getItems().then(assets => {
             this.assets.replace(assets);
         });
     }
 
     search (query) {
-        homeApi.search(query).then(assets => {
+        return homeApi.search(query).then(assets => {
             this.assets.replace(assets);
         });
     }

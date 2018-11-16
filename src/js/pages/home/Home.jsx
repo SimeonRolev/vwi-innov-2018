@@ -12,10 +12,34 @@ class Home extends Component {
     constructor (props) {
         super(props);
         this.itemCollection = new Collection(this.props.assetStore.assets);
+
+        this.state = {
+            loading: true
+        }
     }
 
     componentDidMount () {
-        this.props.assetStore.loadHomeAssets();
+        this.loadAssets();
+    }
+
+    componentDidUpdate (prevProps) {
+        if (this.props.match.params.q !== prevProps.match.params.q) {
+            this.loadAssets()
+        }
+    }
+
+    loadAssets () {
+        this.setState({ loading: true });
+
+        if (this.props.match.params && this.props.match.params.q) {
+            this.props.assetStore
+                .search(this.props.match.params.q)
+                .then(() => this.setState({ loading: false }));
+        } else {
+            this.props.assetStore
+                .loadHomeAssets()
+                .then(() => this.setState({ loading: false }));
+        }
     }
 
     render () {
@@ -24,13 +48,15 @@ class Home extends Component {
                 <Header />
                 <div className='asset-container asset-container--grid'>
                     {
-                        this.itemCollection.items.map((item, idx) =>
-                            <HomeAsset
-                                key={idx}
-                                isSelected={item.isSelected}
-                                onClick={ () => this.itemCollection.select(item.data.id) }
-                                data={item.data}
-                            />)
+                        this.state.loading 
+                            ? <div>Loading ... </div>
+                            : this.itemCollection.items.map((item, idx) =>
+                                <HomeAsset
+                                    key={idx}
+                                    isSelected={item.isSelected}
+                                    onClick={ () => this.itemCollection.select(item.data.id) }
+                                    data={item.data}
+                                />)
                     }
                 </div>
             </div>

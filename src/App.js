@@ -23,7 +23,10 @@ class App extends Component {
                 UIStore={this.store.ui}
             >
                 <Router>
-                    <Route exact path='/' component={ Home } />
+                    <React.Fragment>
+                        <Route exact path='/' component={ Home } />
+                        <Route path='/search/:q' component={ Home } />
+                    </React.Fragment>
                 </Router>
             </Provider>
         );
